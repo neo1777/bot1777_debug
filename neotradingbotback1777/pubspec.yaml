@@ -1,0 +1,43 @@
+name: neotradingbotback1777
+description: "Backend del bot di trading Neotradingbot1777."
+version: 2.0.0 # Aggiorniamo la versione per riflettere la riscrittura
+funding: neo1777 <info@neo1777.eu>
+homepage: https://neo1777.eu
+
+environment:
+  sdk: ">=3.5.0 <4.0.0" # Restringiamo a Dart 3.5+ per sealed class, pattern matching, switch expression
+
+# Dipendenze di produzione
+dependencies:
+  equatable: ^2.0.7
+  fpdart: ^1.1.0
+  hive_ce: ^2.19.1
+  logger: ^2.5.0
+  http: ^1.4.0
+  crypto: ^3.0.6
+  web_socket_channel: ^3.0.3
+  mutex: ^3.1.0
+  fixnum: ^1.1.1
+  get_it: ^9.2.0
+  grpc: ^5.1.0
+  dotenv: ^4.2.0
+  path: ^1.9.1
+  protobuf: ^6.0.0
+  rxdart: ^0.28.0
+  injectable: ^2.5.1
+  decimal: ^3.2.4
+  rational: ^2.2.3
+  meta: ^1.12.0
+
+  intl: any
+dev_dependencies:
+  mockito: ^5.6.3
+  injectable_generator: ^2.12.0
+  build_runner: ^2.10.5
+  hive_ce_generator: ^1.11.0
+  lints: ^6.0.0
+  protoc_plugin: ^25.0.0
+  source_gen: ^4.2.0
+  test: ^1.29.0
+  mutation_test: ^1.7.1
+  mocktail: ^1.0.4
