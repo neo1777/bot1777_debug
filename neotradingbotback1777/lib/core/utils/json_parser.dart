@@ -22,8 +22,9 @@ class JsonParser {
 
       return Right(decoded);
     } on FormatException catch (_) {
-      return Left(
-          ValidationFailure(message: 'Invalid JSON format: $jsonString'));
+      return Left(ValidationFailure(
+          message:
+              'Invalid JSON format (input truncated): ${jsonString.length > 100 ? jsonString.substring(0, 100) + "..." : jsonString}'));
     } catch (e, stackTrace) {
       UnifiedErrorHandler.handleError(
           'JsonParser.safeDecode (Generic)', e, stackTrace);
@@ -47,8 +48,9 @@ class JsonParser {
 
       return Right(decoded);
     } on FormatException catch (_) {
-      return Left(
-          ValidationFailure(message: 'Invalid JSON format: $jsonString'));
+      return Left(ValidationFailure(
+          message:
+              'Invalid JSON format (input truncated): ${jsonString.length > 100 ? jsonString.substring(0, 100) + "..." : jsonString}'));
     } catch (e, stackTrace) {
       UnifiedErrorHandler.handleError(
           'JsonParser.safeDecodeList (Generic)', e, stackTrace);

@@ -32,10 +32,9 @@ class TradingLoopPreFlightCheck {
     _log.d('Esecuzione controlli pre-volo per $symbol...');
 
     // 1. Validazione formato simbolo
-    if (symbol.isEmpty || !symbol.contains('USDC')) {
+    if (symbol.isEmpty) {
       return Left(ValidationFailure(
-          message:
-              'Simbolo non valido: $symbol. Deve contenere USDC (es. BTCUSDC)'));
+          message: 'Simbolo non valido: il parametro simbolo è vuoto.'));
     }
 
     // 1.1. Zombie Trade Detection: Verifica ordini aperti su Binance

@@ -174,8 +174,10 @@ class TradingLoopManager {
       }
     }
 
-    // Se tutti i tentativi falliscono, ritorna l'ultimo errore
-    return repo.saveStrategyState(state);
+    // Se tutti i tentativi falliscono, ritorna un errore di persistenza
+    return Left(CacheFailure(
+      message: 'Failed to save state for $symbol after $maxRetries attempts',
+    ));
   }
 
   /// Forza lo shutdown dell'isolate in caso di recovery fallito
