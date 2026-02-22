@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+// [AUDIT-PHASE-10] - Presentation & UX Audit Marker
 import 'dart:async' show unawaited;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neotradingbotfront1777/core/theme/app_theme.dart';
