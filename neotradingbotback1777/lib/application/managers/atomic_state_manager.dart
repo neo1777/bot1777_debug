@@ -193,6 +193,7 @@ class AtomicStateManager {
     _log.i('Invalidating cache. Final stats: ${getCacheStats()}');
     _cachedState = null;
     _multiSymbolCache.clear();
+    _repositoryFetchFailures = 0; // NEW: Reset failures on manual invalidation
   }
 
   /// Invalida la cache per un simbolo specifico
@@ -292,7 +293,17 @@ class AtomicStateManager {
       final stats = _getSystemHealthStats();
       _log.i('[HEARTBEAT] Statistiche sistema: $stats');
 
+      // Kilo AI: Restore cleanup during heartbeat to prevent accumulation
+      _cleanupCache();
+
       _lastHeartbeat = now;
+
+      // NEW: Periodically reset failure counter to handle transient issues
+      // Reset window every 1 hour (as suggested by "lifetime counter never reset")
+      if (now.difference(_lastCacheCleanup).inHours >= 1) {
+        _repositoryFetchFailures = 0;
+        _lastCacheCleanup = now; // Reuse this timestamp for window reset
+      }
     }
   }
 
@@ -371,6 +382,7 @@ class AtomicStateManager {
     _cacheHits = 0;
     _cacheMisses = 0;
     _cacheEvictions = 0;
+    _repositoryFetchFailures = 0; // NEW: Reset on dispose
     _lastCacheCleanup = DateTime.now();
     stopPeriodicCleanup(); // Assicurati di fermare il timer al dispose
   }
