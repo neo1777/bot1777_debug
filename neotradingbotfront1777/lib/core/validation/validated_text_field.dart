@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// [AUDIT-PHASE-10] - Presentation & UX Audit Marker
 import 'input_validator.dart';
 
 /// A text field with built-in validation
