@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:grpc/grpc.dart';
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 import 'package:neotradingbotback1777/core/utils/token_bucket.dart';
+import 'package:neotradingbotback1777/core/config/env_config.dart';
 
 /// Header che il client deve inviare con la API key.
 const String _apiKeyHeader = 'x-api-key';
 
 /// La API key attesa, letta una sola volta da `GRPC_API_KEY`.
 /// Se non configurata, `_expectedKey` è `null` e l'interceptor è disabilitato.
-final String? _expectedKey = Platform.environment['GRPC_API_KEY'];
+final String? _expectedKey = EnvConfig().get('GRPC_API_KEY');
 
 /// `true` se `GRPC_API_KEY` è configurata e non vuota.
 final bool _authEnabled = _expectedKey != null && _expectedKey!.isNotEmpty;

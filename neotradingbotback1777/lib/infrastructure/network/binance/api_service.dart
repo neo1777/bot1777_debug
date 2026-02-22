@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:neotradingbotback1777/core/config/api_keys_config.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +8,7 @@ import 'package:neotradingbotback1777/core/config/constants.dart';
 
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 import 'package:neotradingbotback1777/core/monitoring/business_metrics_monitor.dart';
+import 'package:neotradingbotback1777/core/utils/unique_id_generator.dart';
 import 'package:neotradingbotback1777/core/utils/json_parser.dart';
 import 'package:neotradingbotback1777/core/utils/circuit_breaker.dart';
 import 'package:neotradingbotback1777/domain/entities/account_info.dart';
@@ -73,7 +73,6 @@ class ApiService implements ITradingApiService {
   int _accountInfoListenerCount = 0;
 
   final ApiKeysConfig _apiKeysConfig;
-  final _random = Random();
 
   // Cache per ExchangeInfo
   ExchangeInfo? _exchangeInfoCache;
@@ -182,8 +181,8 @@ class ApiService implements ITradingApiService {
     const endpoint = '/api/v3/order';
 
     // Generate unique client order ID for deduplication protection
-    final uniqueOrderId = clientOrderId ??
-        'BOT_${DateTime.now().millisecondsSinceEpoch}_${_random.nextInt(9999)}';
+    final uniqueOrderId =
+        clientOrderId ?? UniqueIdGenerator.generateStringId('BOT_${symbol}');
 
     final params = {
       'symbol': symbol,
@@ -432,9 +431,6 @@ class ApiService implements ITradingApiService {
     final wrapper = StreamController<Either<Failure, double>>(
       onListen: () {
         _priceListenerCount++;
-      },
-      onCancel: () async {
-        _priceListenerCount = (_priceListenerCount - 1).clamp(0, 1 << 31);
       },
     );
     final sub = _priceStreamController!.stream.listen(

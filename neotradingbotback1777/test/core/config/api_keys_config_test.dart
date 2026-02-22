@@ -16,28 +16,12 @@ void main() {
         secretKey: validKey2,
         testApiKey: '',
         testSecretKey: '',
-        telegramBotToken: '12345:ABC',
-        telegramChatId: '-100123',
       );
 
       expect(config.apiKey, validKey);
       expect(config.secretKey, validKey2);
       expect(config.testApiKey, '');
       expect(config.testSecretKey, '');
-      expect(config.telegramBotToken, '12345:ABC');
-      expect(config.telegramChatId, '-100123');
-    });
-
-    test('[AKC-02] telegram fields are nullable', () {
-      final config = ApiKeysConfig(
-        apiKey: validKey,
-        secretKey: validKey2,
-        testApiKey: '',
-        testSecretKey: '',
-      );
-
-      expect(config.telegramBotToken, isNull);
-      expect(config.telegramChatId, isNull);
     });
   });
 

@@ -172,14 +172,12 @@ Future<void> main() async {
     print('@@@ FATAL ERROR: $e');
     print(stackTrace);
     log.f('ERRORE FATALE DURANTE L\'AVVIO:', error: e, stackTrace: stackTrace);
-    if (EnvConfig().getBool('STRICT_BOOT', false)) exit(1);
     exit(1); // Force exit to prevent silent failure
   } catch (e, stackTrace) {
     print('@@@ UNEXPECTED ERROR: $e');
     print(stackTrace);
     log.f('ERRORE INATTESO DURANTE L\'AVVIO:',
         error: e, stackTrace: stackTrace);
-    if (EnvConfig().getBool('STRICT_BOOT', false)) exit(1);
     exit(1); // Force exit
   }
 }

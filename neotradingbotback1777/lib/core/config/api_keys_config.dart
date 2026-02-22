@@ -36,19 +36,11 @@ class ApiKeysConfig {
   final String testApiKey;
   final String testSecretKey;
 
-  /// @deprecated Usare [TelegramConfig.botToken] direttamente.
-  final String? telegramBotToken;
-
-  /// @deprecated Usare [TelegramConfig.chatId] direttamente.
-  final String? telegramChatId;
-
   ApiKeysConfig({
     required this.apiKey,
     required this.secretKey,
     required this.testApiKey,
     required this.testSecretKey,
-    this.telegramBotToken,
-    this.telegramChatId,
   });
 
   /// Valida una API key di Binance secondo i criteri di sicurezza.
@@ -171,8 +163,6 @@ class ApiKeysConfig {
           (f) => throw Exception('Unexpected error'), (k) => k),
       testApiKey: testApiKey,
       testSecretKey: testSecretKey,
-      telegramBotToken: env.get('TELEGRAM_BOT_TOKEN'),
-      telegramChatId: env.get('TELEGRAM_CHAT_ID'),
     ));
   }
 
