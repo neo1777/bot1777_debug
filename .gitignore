@@ -23,3 +23,12 @@ Thumbs.db
 .antigravity/
 .gemini/
 
+
+# Deployment Files
+scripts/
+docker-compose.yml
+envoy.yaml
+.env*
+Dockerfile
+entrypoint.sh
+

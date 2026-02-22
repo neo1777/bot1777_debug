@@ -125,6 +125,8 @@ Future<void> main() async {
     }
 
     await server.serve(
+      address:
+          '0.0.0.0', // Esplicitamente binding a tutte le interfacce per la VPS
       port: port,
       security: tlsCredentials,
     );
