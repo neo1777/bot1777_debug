@@ -361,20 +361,13 @@ class BinanceApiClient {
       return completer.future;
     }
 
-    if (isOrder) {
-      if (_inFlightOrder < _maxConcurrentOrder) {
-        _inFlightOrder++;
-        scheduleMicrotask(() {
-          task();
-        });
-      } else {
-        _orderQueue.add(task);
-      }
+    if (_inFlightOrder < _maxConcurrentOrder) {
+      _inFlightOrder++;
+      scheduleMicrotask(() {
+        task();
+      });
     } else {
-      if (!(_namespaceQueues[namespace]?.contains(task) ?? false)) {
-        // Fallback locale, anche se non dovrebbe essere raggiunto
-        scheduleMicrotask(() => task());
-      }
+      _orderQueue.add(task);
     }
 
     return completer.future;

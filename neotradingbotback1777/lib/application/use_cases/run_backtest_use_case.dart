@@ -56,6 +56,13 @@ class RunBacktestUseCase {
     required AppSettings settings,
   }) async {
     try {
+      if (!settings.buyOnStart && !settings.enableReBuy) {
+        return Left(ValidationFailure(
+          message:
+              'Backtest requires buyOnStart=true or enableReBuy=true to execute any trades.',
+        ));
+      }
+
       _log.i('Starting backtest for $symbol from $startTime to $endTime');
 
       // 1. Fetch historical data (klines) with pagination
@@ -73,13 +80,6 @@ class RunBacktestUseCase {
 
           // 2. Preparazione fee (default Binance 0.1% maker/taker)
           final feeInfo = FeeInfo.defaultBinance(symbol: symbol);
-
-          if (!settings.buyOnStart && !settings.enableReBuy) {
-            return Left(ValidationFailure(
-              message:
-                  'Backtest requires buyOnStart=true or enableReBuy=true to execute any trades.',
-            ));
-          }
 
           // 3. Simulate trading loop con DCA e fee
           Decimal cumulativeProfit = Decimal.zero;
