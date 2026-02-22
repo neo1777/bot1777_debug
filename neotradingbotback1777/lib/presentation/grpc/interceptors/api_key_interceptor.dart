@@ -1,4 +1,6 @@
 import 'dart:async';
+
+// [AUDIT-PHASE-11] - Final Convergence & Security Audit Marker
 import 'package:grpc/grpc.dart';
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 import 'package:neotradingbotback1777/core/utils/token_bucket.dart';

@@ -1,4 +1,6 @@
 import 'dart:async';
+
+// [AUDIT-PHASE-11] - Final Convergence & Resilience Audit Marker
 import 'dart:isolate';
 import 'package:get_it/get_it.dart';
 import 'package:neotradingbotback1777/application/use_cases/start_trading_loop_atomic_use_case.dart';
