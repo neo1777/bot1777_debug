@@ -54,3 +54,7 @@ app.*.map.json
 # Config files
 api_keys.dart
 config.json
+
+# Local Databases & Executables
+hive_data/
+*.exe
