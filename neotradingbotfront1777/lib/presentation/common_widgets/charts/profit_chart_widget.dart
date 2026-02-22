@@ -6,7 +6,7 @@ import 'package:neotradingbotfront1777/presentation/common_widgets/charts/chart_
 
 /// Solo Leveling themed profit/loss chart (fl_chart implementation)
 class ProfitChartWidget extends StatefulWidget {
-  ProfitChartWidget({
+  const ProfitChartWidget({
     required this.trades,
     super.key,
     this.height = 250,

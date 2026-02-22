@@ -321,7 +321,7 @@ class _ValidatedFormState extends State<ValidatedForm> {
               },
             ),
           );
-        }).toList(),
+        }),
 
         if (widget.builder != null) widget.builder!(_getValidatedData()),
 

@@ -159,7 +159,7 @@ void main() {
         when(
           () => mockTradingRepository.subscribeToStrategyState(any()),
         ).thenAnswer((_) => streamController.stream);
-        when(() => mockManageUseCase(any())).thenAnswer((_) async => null);
+        when(() => mockManageUseCase(any())).thenAnswer((_) async {});
         return strategyStateBloc;
       },
       act: (bloc) async {
@@ -221,7 +221,7 @@ void main() {
       build: () {
         when(
           () => mockSymbolContext.setActiveSymbol(any()),
-        ).thenAnswer((_) async => null);
+        ).thenAnswer((_) async {});
         when(
           () => mockTradingRepository.getStrategyState(any()),
         ).thenAnswer((_) async => Right(tStrategyState));

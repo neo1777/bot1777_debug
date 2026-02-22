@@ -94,7 +94,14 @@ class Sanitizer {
     );
 
     // Remove potentially dangerous characters
-    cleaned = cleaned.replaceAll(RegExp(r'[<>"\'\\\]]'), '');
+    cleaned = cleaned.replaceAll(
+      RegExp(
+        r'[<>"'
+        "'"
+        r'\\\]]',
+      ),
+      '',
+    );
 
     // Trim whitespace
     return cleaned.trim();
@@ -128,7 +135,14 @@ class Sanitizer {
     if (input.isEmpty) return '';
 
     // Remove potential JSON injection characters
-    return input.replaceAll(RegExp(r'[<>"\'\\\]]'), '');
+    return input.replaceAll(
+      RegExp(
+        r'[<>"'
+        "'"
+        r'\\\]]',
+      ),
+      '',
+    );
   }
 
   /// Sanitize SQL input (basic protection)

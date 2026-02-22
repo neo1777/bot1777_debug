@@ -241,7 +241,7 @@ class _BacktestViewState extends State<BacktestView> {
             'Prezzo: ${trade.price.toStringAsFixed(2)} | Qty: ${trade.quantity.toStringAsFixed(4)} | ${DateFormat('dd/MM/yyyy HH:mm').format(trade.timestamp)}',
           ),
           trailing: Text(
-            trade.profit != null ? '${trade.profit!.toStringAsFixed(2)}' : '-',
+            trade.profit != null ? trade.profit!.toStringAsFixed(2) : '-',
             style: TextStyle(color: color, fontWeight: FontWeight.bold),
           ),
         );

@@ -53,8 +53,9 @@ class DcaSettingsSection extends StatelessWidget {
               'Discesa dal prezzo di riferimento (ultimo o medio) che fa scattare un DCA. Più alto ⇒ meno DCA.',
           extraValidator: (value) {
             final parsedValue = double.parse(value);
-            if (parsedValue < 0 || parsedValue > 90)
+            if (parsedValue < 0 || parsedValue > 90) {
               return 'Intervallo [0, 90]';
+            }
             return null;
           },
         ),

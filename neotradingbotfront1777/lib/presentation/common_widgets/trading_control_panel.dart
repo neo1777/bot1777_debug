@@ -378,6 +378,7 @@ class _TradingControlPanelState extends State<TradingControlPanel> {
                 // Persisti simbolo e notifica bloc interessati
                 unawaited(sl<SymbolContext>().setActiveSymbol(newValue));
                 widget.onSymbolChanged(newValue);
+                if (!mounted) return;
                 context.read<PriceBlocReal>().add(
                   SubscribeToPriceUpdates(newValue),
                 );
