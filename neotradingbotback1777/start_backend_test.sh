@@ -15,8 +15,8 @@ fi
 
 # We force insecure mode for local VPS/Hybrid testing to avoid TLS certificate hassle initially
 # IN PRODUCTION THIS MUST BE FALSE
-echo "GRPC_ALLOW_INSECURE=true" >> .env
-echo "GRPC_PORT=8080" >> .env
+sed -i 's/^ALLOW_INSECURE_GRPC=.*/ALLOW_INSECURE_GRPC=true/' .env
+sed -i 's/^GRPC_PORT=.*/GRPC_PORT=8080/' .env
 
 echo "=================================================="
 echo "Starting NeoTradingBot Backend in Hybrid Test Mode"
