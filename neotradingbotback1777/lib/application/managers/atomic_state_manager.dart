@@ -57,8 +57,11 @@ class AtomicStateManager {
   int _repositoryFetchFailures = 0;
   DateTime _lastCacheCleanup = DateTime.now();
   DateTime _lastHeartbeat = DateTime.now();
+  DateTime _lastFailureReset =
+      DateTime.now(); // NEW: dedicated failure reset window
 
-  // === CLEANUP PERIODICO ===
+  /// Soglia di errori oltre la quale il sistema è considerato "non sano"
+  final int failureThreshold;
   Timer? _cleanupTimer;
 
   AtomicStateManager(
@@ -67,6 +70,7 @@ class AtomicStateManager {
     this.cacheTimeout = const Duration(seconds: 30),
     this.maxCacheEntries = 50,
     this.maxCacheAge = const Duration(minutes: 30),
+    this.failureThreshold = 10, // NEW: configurable threshold
   });
 
   /// Esegue un'operazione atomica sullo stato di trading.
@@ -190,10 +194,14 @@ class AtomicStateManager {
 
   /// Invalida la cache forzando il reload dal repository
   void invalidateCache() {
-    _log.i('Invalidating cache. Final stats: ${getCacheStats()}');
+    _log.i(
+        'Invalidating cache (resetting stats). Final stats: ${getCacheStats()}');
     _cachedState = null;
     _multiSymbolCache.clear();
-    _repositoryFetchFailures = 0; // NEW: Reset failures on manual invalidation
+    _cacheHits = 0;
+    _cacheMisses = 0;
+    _cacheEvictions = 0;
+    _repositoryFetchFailures = 0;
   }
 
   /// Invalida la cache per un simbolo specifico
@@ -293,16 +301,12 @@ class AtomicStateManager {
       final stats = _getSystemHealthStats();
       _log.i('[HEARTBEAT] Statistiche sistema: $stats');
 
-      // Kilo AI: Restore cleanup during heartbeat to prevent accumulation
-      _cleanupCache();
-
-      _lastHeartbeat = now;
-
-      // NEW: Periodically reset failure counter to handle transient issues
-      // Reset window every 1 hour (as suggested by "lifetime counter never reset")
-      if (now.difference(_lastCacheCleanup).inHours >= 1) {
+      // Kilo AI: Periodically reset failure counter to handle transient issues
+      // Reset window every 1 hour (use dedicated timestamp)
+      if (now.difference(_lastFailureReset).inHours >= 1) {
+        _log.i('Resetting repository fetch failures window.');
         _repositoryFetchFailures = 0;
-        _lastCacheCleanup = now; // Reuse this timestamp for window reset
+        _lastFailureReset = now;
       }
     }
   }
@@ -330,7 +334,7 @@ class AtomicStateManager {
     final repoFailures = _repositoryFetchFailures;
 
     final cacheTooFull = totalEntries > (maxCacheEntries * 0.8);
-    final tooManyErrors = repoFailures > 10; // Soglia per errori reali
+    final tooManyErrors = repoFailures > failureThreshold; // Use property
 
     return !cacheTooFull && !tooManyErrors;
   }
