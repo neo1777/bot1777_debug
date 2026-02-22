@@ -49,3 +49,4 @@ Assicurata la corretta implementazione di `health.proto` nel backend per l'integ
 3. Aggiornamento della precisione (campi String).
 4. Eliminazione di massa del vecchio codice generato.
 5. Script di generazione unico e portatile (`scripts/generate_protos.sh`).
+

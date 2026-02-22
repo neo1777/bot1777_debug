@@ -114,3 +114,4 @@ Ogni 3 mesi:
 1. Avvia un nuovo VPS
 2. Deploy con `./scripts/deploy.sh` e dati di backup
 3. Verifica ripristino corretto dello stato trading
+

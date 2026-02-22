@@ -199,3 +199,4 @@ stateDiagram-v2
 - L'architettura segue i principi della Clean Architecture
 - La sicurezza è implementata a più livelli
 - Il monitoraggio delle prestazioni è integrato in tutto il sistema
+

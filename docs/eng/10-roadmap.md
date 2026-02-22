@@ -19,3 +19,4 @@
 - [ ] **Kubernetes Support**: Helm charts for K8s deployment.
 - [ ] **Multi-Tenancy**: Support multiple users with isolated portfolios.
 - [ ] **Mobile App**: Release Android/iOS versions of the dashboard.
+

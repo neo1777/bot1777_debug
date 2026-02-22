@@ -150,3 +150,4 @@ import "google/protobuf/timestamp.proto";  // → google.protobuf.Timestamp
 - [x] Certificate Pinning nel frontend
 - [x] `STRICT_BOOT` nel backend
 - [x] Health check conforme a specifica ufficiale gRPC
+

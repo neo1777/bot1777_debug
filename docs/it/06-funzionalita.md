@@ -90,3 +90,4 @@ Pagina dedicata per debug della connettività gRPC e TLS.
 - **`STRICT_BOOT`**: Il backend non si avvia senza certificati TLS validi
 - **Intercettori JWT**: Iniezione sicura di token in ogni chiamata gRPC (se configurati)
 - **Segreti**: Tutte le chiavi API in variabili d'ambiente (mai committate)
+

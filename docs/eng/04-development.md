@@ -234,3 +234,4 @@ Per domande o problemi con la suite di test:
 ---
 
 **🚀 NeoTradingBot 1777 - Test Suite v2.2 - Enterprise Grade - Ultimo aggiornamento: 2026-02-18**
+

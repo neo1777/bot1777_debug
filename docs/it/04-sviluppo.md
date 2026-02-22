@@ -144,3 +144,4 @@ Un test è **flaky** se fallisce in CI ma passa localmente (o viceversa).
 - [ ] Frontend: repository tests (0/10)
 - [ ] Test integrazione E2E completi
 - [ ] Test sicurezza e vulnerabilità
+

@@ -347,3 +347,4 @@ Le seguenti issue precedentemente segnalate sono correttamente risolte e funzion
 - ✅ `SwitchListTile` "Ferma alla prossima vendita" con tooltip
 - ✅ Pulse animation sul prezzo in `PriceDisplayCard`
 - ✅ Error page tematizzata con `ElevatedButton` → Dashboard
+

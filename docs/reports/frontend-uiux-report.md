@@ -454,3 +454,4 @@ Tre `BlocBuilder` annidati. Il terzo (`PriceBlocReal`) si ricostruisce ad **ogni
 ---
 
 *Report generato tramite analisi statica completa — nessuna modifica al codice effettuata.*
+

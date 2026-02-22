@@ -38,3 +38,4 @@ Ensures that the bot can resume its exact state after a crash or manual restart.
 - **gRPC TLS**: Secure communication is enforced in production.
 - **Certificate Pinning**: Matches server subject/issuer to prevent MITM attacks.
 - **Auth Interceptors**: Securely injects JWT tokens into every gRPC call.
+

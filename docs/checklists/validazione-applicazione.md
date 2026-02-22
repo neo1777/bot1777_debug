@@ -490,3 +490,4 @@
     - Stima effort per la risoluzione
     - Prioritizza basandoti su impatto vs effort
 4. **Iterazione**: Questa checklist è un processo iterativo, non un evento one-time. Rivisitala regolarmente.
+

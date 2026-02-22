@@ -33,3 +33,4 @@ R: Usa il pulsante "Stop" accanto alla strategia nella dashboard. Questo termine
 
 **D: I miei certificati sono sicuri?**
 R: Sì, la comunicazione tra dashboard e server è criptata via TLS. Nessuno può intercettare i tuoi dati sulla rete.
+

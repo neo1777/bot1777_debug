@@ -25,3 +25,4 @@ To run the automated test suite for the frontend:
 ```bash
 flutter test
 ```
+

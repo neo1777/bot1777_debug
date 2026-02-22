@@ -68,3 +68,4 @@ Reference storica per architettura, API design, schema dati, sicurezza.
 - **Runbook**: [docs/it/08-operativo.md](it/08-operativo.md)
 - **Backtest**: [docs/it/06-funzionalita.md](it/06-funzionalita.md#4-backtesting)
 - **Troubleshooting**: [docs/it/09-troubleshooting.md](it/09-troubleshooting.md)
+
