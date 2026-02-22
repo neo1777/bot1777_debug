@@ -25,6 +25,9 @@ Future<void> main() async {
   log.i('  I log di esecuzione sono salvati in: neotradbot_execution.log  ');
   log.i('=================================================================');
 
+  // Log security status immediately
+  logApiKeyAuthStatus();
+
   try {
     log.i('Inizializzazione dipendenze...');
     await initDependencies();
@@ -127,8 +130,6 @@ Future<void> main() async {
 
     final securityMode = tlsCredentials != null ? 'SICURO (TLS)' : 'NON SICURO';
     log.i('Server gRPC in ascolto sulla porta $port in modalità $securityMode');
-    logApiKeyAuthStatus();
-
     // === Auto-recovery opzionale degli isolates ===
     try {
       final strategyStateRepo = sl<StrategyStateRepository>();

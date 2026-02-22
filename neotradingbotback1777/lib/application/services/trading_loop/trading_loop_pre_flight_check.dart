@@ -8,20 +8,24 @@ import 'package:neotradingbotback1777/domain/repositories/i_symbol_info_reposito
 import 'package:neotradingbotback1777/domain/repositories/price_repository.dart';
 import 'package:neotradingbotback1777/domain/entities/account_info.dart';
 import 'package:neotradingbotback1777/domain/entities/balance.dart';
+import 'package:neotradingbotback1777/domain/services/i_trading_api_service.dart';
 
 class TradingLoopPreFlightCheck {
   final AccountRepository _accountRepository;
   final ISymbolInfoRepository _symbolInfoRepository;
   final PriceRepository _priceRepository;
+  final ITradingApiService _apiService;
   final _log = LogManager.getLogger();
 
   TradingLoopPreFlightCheck({
     required AccountRepository accountRepository,
     required ISymbolInfoRepository symbolInfoRepository,
     required PriceRepository priceRepository,
+    required ITradingApiService apiService,
   })  : _accountRepository = accountRepository,
         _symbolInfoRepository = symbolInfoRepository,
-        _priceRepository = priceRepository;
+        _priceRepository = priceRepository,
+        _apiService = apiService;
 
   Future<Either<Failure, Unit>> execute(
       String symbol, AppSettings settings) async {
@@ -32,6 +36,37 @@ class TradingLoopPreFlightCheck {
       return Left(ValidationFailure(
           message:
               'Simbolo non valido: $symbol. Deve contenere USDC (es. BTCUSDC)'));
+    }
+
+    // 1.1. Zombie Trade Detection: Verifica ordini aperti su Binance
+    // Se ci sono ordini aperti ma noi stiamo avviando il loop, potrebbe esserci
+    // un'incoerenza di stato (es. ordini rimasti appesi dopo un crash).
+    try {
+      final openOrdersResult = await _apiService.getOpenOrders(symbol);
+      final Either<Failure, List<Map<String, dynamic>>> ordersEither =
+          openOrdersResult;
+      final Either<Failure, Unit> failure = ordersEither.fold(
+        (f) => Left(f),
+        (orders) {
+          if (orders.isNotEmpty) {
+            _log.w(
+                'Zombie Trade Detection: Trovati ${orders.length} ordini aperti per $symbol su Binance.');
+            return Left(BusinessLogicFailure(
+              message:
+                  'Rilevati ordini aperti residui ("Zombie Trades") per $symbol. '
+                  'Chiuderli manualmente su Binance prima di riavviare il bot per garantire la coerenza dello stato.',
+            ));
+          }
+          return const Right(unit);
+        },
+      );
+
+      if (failure.isLeft()) return failure;
+    } catch (e) {
+      _log.w('Errore durante Zombie Trade Detection per $symbol: $e');
+      // Procediamo comunque? Per sicurezza blocchiamo se non riusciamo a verificare.
+      return Left(ServerFailure(
+          message: 'Impossibile verificare ordini aperti (Zombie Trades): $e'));
     }
 
     // 2. Verifica connettività base e esistenza simbolo su Binance

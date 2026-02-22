@@ -28,6 +28,9 @@ void registerMockitoDummies() {
   // Either<Failure, List<Kline>>
   provideDummy<Either<Failure, List<Kline>>>(const Right([]));
 
+  // Either<Failure, List<Map<String, dynamic>>>
+  provideDummy<Either<Failure, List<Map<String, dynamic>>>>(const Right([]));
+
   // Either<Failure, AppStrategyState>
   provideDummy<Either<Failure, AppStrategyState>>(
     Right(AppStrategyState(symbol: 'BTCUSDT')),
