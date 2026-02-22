@@ -296,3 +296,4 @@ class FakeFeeRepository extends Fake implements IFeeRepository {
     return Right(FeeInfo.defaultBinance(symbol: symbol));
   }
 }
+

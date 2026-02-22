@@ -1510,3 +1510,4 @@ FifoAppTrade createMockTrade({required Decimal price, Decimal? quantity}) {
     isExecuted: true,
   );
 }
+
