@@ -88,3 +88,4 @@ docker compose up --build -d
 - **Errore di Connessione gRPC**: Verifica che l'host e la porta del backend nel frontend corrispondano al tuo ambiente.
 - **Fallimento Handshake TLS**: Assicurati che il file `server.crt` in `neotradingbotfront1777/assets/certs/` corrisponda a quello usato dal server.
 - **Permesso Negato**: Assicurati che gli script in `scripts/` siano eseguibili: `chmod +x scripts/*.sh`.
+

@@ -54,3 +54,4 @@
 - [x] `backtest_result_mapper_test.dart`
 - [x] `order_status_mapper_test.dart` (pre-esistente)
 - [x] `strategy_state_mapper_test.dart` (pre-esistente)
+

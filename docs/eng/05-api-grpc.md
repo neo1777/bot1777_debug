@@ -82,3 +82,4 @@ Use `protoc` with the Dart plugin:
 - **Small Messages**: Avoid deep nesting or hundreds of fields.
 - **Versioning**: Add new fields, don't change tags or types of existing ones.
 - **Contract-First**: Define the `.proto` before implementing the logic.
+

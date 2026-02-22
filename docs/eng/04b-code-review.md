@@ -41,3 +41,4 @@ Il reviewer deve verificare:
 - [ ] Non ci sono dipendenze non necessarie?
 - [ ] Il test fallisce se la logica viene rotta?
 - [ ] Pulizia dei mock nel `tearDown` se necessario?
+

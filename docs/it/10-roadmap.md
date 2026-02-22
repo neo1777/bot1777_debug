@@ -49,3 +49,4 @@ Ultimo aggiornamento: Febbraio 2026
 - [ ] **Multi-Tenancy**: Supporto multi-utente con portfolio isolati
 - [ ] **App Mobile**: Rilascio iOS/Android della dashboard
 - [ ] **Integrazione ML**: Sperimentazione TFLite per price prediction
+

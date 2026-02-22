@@ -29,3 +29,4 @@ NeoTradingBot 1777 is an automated trading system based on DCA (Dollar Cost Aver
 4. **Security**: Mandatory TLS and Certificate Pinning for production environments.
 5. **Recovery**: Checkpoint system to resume trading state after restart/crash.
 6. **Health Monitoring**: Real-time server status visibility in the dashboard.
+

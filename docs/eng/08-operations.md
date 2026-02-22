@@ -93,3 +93,4 @@ To ensure business continuity and minimize data loss in the event of catastrophi
   1. Spin up a new VPS.
   2. Deploy bot using `deploy.sh` and backup data.
   3. Verify trading state restores correctly.
+

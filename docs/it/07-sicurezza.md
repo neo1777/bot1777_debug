@@ -32,3 +32,4 @@ Il bot comunica esclusivamente con:
 - Il tuo Client (via gRPC)
 
 Nessun dato viene inviato a server di monitoraggio esterni, a meno che non sia esplicitamente configurato dall'utente.
+

@@ -90,3 +90,4 @@ neotradingbot1777/
 ├── docs/                   # Documentazione (questa directory)
 └── docker-compose.yml
 ```
+

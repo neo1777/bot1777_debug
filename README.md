@@ -28,3 +28,4 @@ This repository contains the complete source code for **NeoTradingBot 1777**, di
 
 ## Warning
 This is the `bot1777_debug` repository intended for debugging and development. Ensure no actual trading API secrets or passwords are accidentally committed to this repository. All sensitive information should be excluded via `.gitignore`.
+

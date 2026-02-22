@@ -29,3 +29,4 @@ A: The trading bot runs on the backend (server). Closing the UI does **not** sto
 
 **Q: How do I stop a strategy?**
 A: Use the "Stop" button next to the strategy in the dashboard. This will gracefully terminate the trading loop for that symbol.
+

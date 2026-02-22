@@ -1742,3 +1742,4 @@ inferiore (attualmente usa il timeout default di 30s in `_unaryCall`).
 ### `_calculateSelectedIndex` in main_shell.dart
 Aggiornare i path mappings per includere `/log-settings` e `/backtest`
 con i nuovi indici corrispondenti.
+

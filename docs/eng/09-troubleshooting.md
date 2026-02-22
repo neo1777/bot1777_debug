@@ -45,3 +45,4 @@ This document lists common issues and their solutions.
 ### ❌ Error: `Execution failed (Exit code 1)` on Backend
 - **Cause**: Often due to missing environment variables or invalid certificates.
 - **Solution**: Check the logs: `docker logs botbinance-backend`. If using AOT build, try running in JIT mode (`dart run lib/main.dart`) to see detailed error messages.
+
