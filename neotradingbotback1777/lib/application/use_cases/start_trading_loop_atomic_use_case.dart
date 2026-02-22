@@ -413,6 +413,7 @@ class StartTradingLoopAtomic {
 
   void dispose() {
     _priceSubscription?.cancel();
+    _accountSubscription?.cancel();
     _buyCircuitBreaker.dispose();
     _sellCircuitBreaker.dispose();
     _log.i('StartTradingLoopAtomic disposed successfully');

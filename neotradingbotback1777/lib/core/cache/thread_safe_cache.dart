@@ -228,7 +228,7 @@ class ThreadSafeCache<K, V> {
       'utilization': _cache.length / maxEntries,
       'hits': _hits,
       'misses': _misses,
-      'hitRate': _hits / (_hits + _misses),
+      'hitRate': (_hits + _misses) > 0 ? _hits / (_hits + _misses) : 0.0,
       'evictions': _evictions,
     };
   }
