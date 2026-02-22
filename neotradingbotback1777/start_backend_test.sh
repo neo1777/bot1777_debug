@@ -5,7 +5,12 @@ set -e
 # Load or establish environment
 if [ ! -f .env ]; then
     echo "Creating .env for testing..."
-    cp .env.example .env
+    if [ -f ../.env.example ]; then
+        cp ../.env.example .env
+    else
+        echo "Warning: ../.env.example not found. Creating empty .env"
+        touch .env
+    fi
 fi
 
 # We force insecure mode for local VPS/Hybrid testing to avoid TLS certificate hassle initially
