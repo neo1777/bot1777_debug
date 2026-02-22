@@ -36,8 +36,6 @@ dependencies:
   logger: ^2.6.1
   shared_preferences: ^2.5.0
   intl: ^0.20.2
-  flutter_driver:
-    sdk: flutter
 
 
 
@@ -55,6 +53,8 @@ dev_dependencies:
     sdk: flutter
   mutation_test: ^1.7.1
   flutter_lints: ^5.0.0
+  flutter_driver:
+    sdk: flutter
 
 flutter:
   uses-material-design:
