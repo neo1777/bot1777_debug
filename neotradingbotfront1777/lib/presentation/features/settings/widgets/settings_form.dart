@@ -341,38 +341,50 @@ class SettingsFormState extends State<SettingsForm> {
   bool get _isDirty {
     final s = widget.initialSettings;
     if (_tradeAmountController.text != s.tradeAmount.toString()) return true;
-    if (_profitTargetController.text != s.profitTargetPercentage.toString())
+    if (_profitTargetController.text != s.profitTargetPercentage.toString()) {
       return true;
-    if (_stopLossController.text != s.stopLossPercentage.toString())
+    }
+    if (_stopLossController.text != s.stopLossPercentage.toString()) {
       return true;
-    if (_dcaDecrementController.text != s.dcaDecrementPercentage.toString())
+    }
+    if (_dcaDecrementController.text != s.dcaDecrementPercentage.toString()) {
       return true;
-    if (_maxOpenTradesController.text != s.maxOpenTrades.toString())
+    }
+    if (_maxOpenTradesController.text != s.maxOpenTrades.toString()) {
       return true;
+    }
     if (_isTestMode != s.isTestMode) return true;
     if (_buyOnStart != s.buyOnStart) return true;
     if (_maxCyclesController.text != s.maxCycles.toString()) return true;
     if (_strictBudget != s.strictBudget) return true;
 
-    if (_initialWarmupTicksController.text != s.initialWarmupTicks.toString())
+    if (_initialWarmupTicksController.text != s.initialWarmupTicks.toString()) {
       return true;
+    }
     if (_initialWarmupSecondsController.text !=
-        s.initialWarmupSeconds.toString())
+        s.initialWarmupSeconds.toString()) {
       return true;
+    }
     if (_initialSignalThresholdPctController.text !=
-        s.initialSignalThresholdPct.toString())
+        s.initialSignalThresholdPct.toString()) {
       return true;
-    if (_dcaCooldownSecondsController.text != s.dcaCooldownSeconds.toString())
+    }
+    if (_dcaCooldownSecondsController.text != s.dcaCooldownSeconds.toString()) {
       return true;
+    }
     if (_dustRetryCooldownSecondsController.text !=
-        s.dustRetryCooldownSeconds.toString())
+        s.dustRetryCooldownSeconds.toString()) {
       return true;
-    if (_maxTradeAmountCapController.text != s.maxTradeAmountCap.toString())
+    }
+    if (_maxTradeAmountCapController.text != s.maxTradeAmountCap.toString()) {
       return true;
-    if (_maxBuyOveragePctController.text != s.maxBuyOveragePct.toString())
+    }
+    if (_maxBuyOveragePctController.text != s.maxBuyOveragePct.toString()) {
       return true;
-    if (_buyCooldownSecondsController.text != s.buyCooldownSeconds.toString())
+    }
+    if (_buyCooldownSecondsController.text != s.buyCooldownSeconds.toString()) {
       return true;
+    }
     if (_buyOnStartRespectWarmup != s.buyOnStartRespectWarmup) return true;
     if (_dcaCompareAgainstAverage != s.dcaCompareAgainstAverage) return true;
     if (_enableFeeAwareTrading != s.enableFeeAwareTrading) return true;
@@ -417,7 +429,7 @@ class SettingsFormState extends State<SettingsForm> {
           ),
     );
 
-    if (shouldPop == true && context.mounted) {
+    if (shouldPop == true && mounted) {
       Navigator.of(context).pop();
     }
   }

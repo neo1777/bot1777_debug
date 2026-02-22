@@ -50,8 +50,9 @@ class CooldownRetrySettingsSection extends StatelessWidget {
               'Tempo minimo tra BUY consecutivi (iniziale o DCA). Riduce doppioni in rapida successione.',
           extraValidator: (value) {
             final parsedValue = double.parse(value);
-            if (parsedValue < 0 || parsedValue > 3600)
+            if (parsedValue < 0 || parsedValue > 3600) {
               return 'Intervallo [0, 3600]';
+            }
             return null;
           },
         ),

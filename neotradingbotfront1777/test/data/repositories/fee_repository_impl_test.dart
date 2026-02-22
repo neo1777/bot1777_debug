@@ -1,4 +1,6 @@
 @Timeout(Duration(seconds: 60))
+library;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
@@ -130,4 +132,3 @@ void main() {
     );
   });
 }
-

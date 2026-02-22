@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'input_validator.dart';
 
 /// A text field with built-in validation
@@ -29,7 +30,7 @@ class ValidatedTextField extends StatefulWidget {
   const ValidatedTextField({
     required this.label,
     required this.validationType,
-    Key? key,
+    super.key,
     this.hint,
     this.initialValue,
     this.onChanged,
@@ -50,7 +51,7 @@ class ValidatedTextField extends StatefulWidget {
     this.focusedErrorBorder,
     this.fillColor,
     this.filled = false,
-  }) : super(key: key);
+  });
 
   @override
   State<ValidatedTextField> createState() => _ValidatedTextFieldState();
@@ -224,13 +225,13 @@ class ValidatedForm extends StatefulWidget {
 
   const ValidatedForm({
     required this.fields,
-    Key? key,
+    super.key,
     this.builder,
     this.onFormValid,
     this.onFormInvalid,
     this.submitButton,
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   @override
   State<ValidatedForm> createState() => _ValidatedFormState();
@@ -319,7 +320,7 @@ class _ValidatedFormState extends State<ValidatedForm> {
               },
             ),
           );
-        }).toList(),
+        }),
 
         if (widget.builder != null) widget.builder!(_getValidatedData()),
 

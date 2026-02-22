@@ -119,8 +119,9 @@ class WarmupSettingsSection extends StatelessWidget {
               'Variazione percentuale assoluta dal primo prezzo osservato necessaria per il primo BUY.',
           extraValidator: (value) {
             final parsedValue = double.parse(value);
-            if (parsedValue < 0 || parsedValue >= 100)
+            if (parsedValue < 0 || parsedValue >= 100) {
               return 'Intervallo [0, 100)';
+            }
             return null;
           },
         ),

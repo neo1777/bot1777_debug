@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'dart:async' show unawaited;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neotradingbotfront1777/core/theme/app_theme.dart';
@@ -376,6 +377,7 @@ class _TradingControlPanelState extends State<TradingControlPanel> {
                 // Persisti simbolo e notifica bloc interessati
                 unawaited(sl<SymbolContext>().setActiveSymbol(newValue));
                 widget.onSymbolChanged(newValue);
+                if (!mounted) return;
                 context.read<PriceBlocReal>().add(
                   SubscribeToPriceUpdates(newValue),
                 );

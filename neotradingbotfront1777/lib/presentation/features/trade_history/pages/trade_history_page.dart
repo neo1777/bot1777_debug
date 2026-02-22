@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neotradingbotfront1777/core/theme/app_theme.dart';
 import 'package:neotradingbotfront1777/presentation/features/trade_history/bloc/trade_history_bloc.dart';

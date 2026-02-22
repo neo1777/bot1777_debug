@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:neotradingbotfront1777/main.dart' as app;
@@ -23,7 +24,7 @@ void main() {
       final startButton = find.text('START');
       expect(startButton, findsOneWidget);
 
-      print('Tapping START strategy button...');
+      debugPrint('Tapping START strategy button...');
       await tester.tap(startButton);
 
       // Pump several times to handle the gRPC call and state updates
@@ -40,7 +41,7 @@ void main() {
           isAttiva = true;
           break;
         }
-        print('Waiting for strategy to start... attempt ${i + 1}');
+        debugPrint('Waiting for strategy to start... attempt ${i + 1}');
       }
 
       expect(
@@ -48,7 +49,7 @@ void main() {
         isTrue,
         reason: 'Strategy should reach "ATTIVA" state after START',
       );
-      print('Strategy status: ATTIVA (Verified)');
+      debugPrint('Strategy status: ATTIVA (Verified)');
 
       // 4. Check for Test Mode / Dry Run indications
       // Even if there is no explicit badge, we can verify that no error
@@ -62,7 +63,7 @@ void main() {
       final stopButton = find.text('STOP');
       expect(stopButton, findsOneWidget);
 
-      print('Tapping STOP strategy button...');
+      debugPrint('Tapping STOP strategy button...');
       await tester.tap(stopButton);
       await tester.pumpAndSettle();
 
@@ -81,7 +82,7 @@ void main() {
         isTrue,
         reason: 'Strategy should return to "INATTIVA" state after STOP',
       );
-      print('Strategy status: INATTIVA (Verified)');
+      debugPrint('Strategy status: INATTIVA (Verified)');
     });
   });
 }

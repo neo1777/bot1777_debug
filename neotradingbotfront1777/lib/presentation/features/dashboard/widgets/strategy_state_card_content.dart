@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
 import 'package:neotradingbotfront1777/core/theme/app_theme.dart';
 import 'package:neotradingbotfront1777/domain/entities/strategy_state.dart';
 import 'package:neotradingbotfront1777/core/di/injection.dart';

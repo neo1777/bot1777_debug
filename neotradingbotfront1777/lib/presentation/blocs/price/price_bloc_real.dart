@@ -23,10 +23,6 @@ class PriceBlocReal extends Bloc<PriceEvent, PriceState> {
 
   final IPriceRepository _priceRepository;
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 
   Future<void> _onSubscribeToPriceUpdates(
     SubscribeToPriceUpdates event,
