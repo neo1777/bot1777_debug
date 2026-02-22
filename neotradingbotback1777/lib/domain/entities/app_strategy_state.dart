@@ -1,3 +1,4 @@
+/// [AUDIT-PHASE-9]
 import 'package:equatable/equatable.dart';
 import 'package:decimal/decimal.dart';
 import 'package:neotradingbotback1777/domain/entities/fifo_app_trade.dart';

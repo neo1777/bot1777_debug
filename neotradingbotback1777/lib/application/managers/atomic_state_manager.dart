@@ -6,7 +6,8 @@ import 'package:neotradingbotback1777/domain/repositories/strategy_state_reposit
 import 'package:fpdart/fpdart.dart';
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 
-/// Classe interna per gestire le entry della cache con metadati
+/// [AUDIT-PHASE-9] Marker for formal Kilo AI audit.
+/// Concurrency safety, atomic state consistency, and resilience review.
 class _CacheEntry {
   final AppStrategyState state;
   DateTime lastAccess;
@@ -53,9 +54,14 @@ class AtomicStateManager {
   int _cacheHits = 0;
   int _cacheMisses = 0;
   int _cacheEvictions = 0;
+  int _repositoryFetchFailures = 0;
   DateTime _lastCacheCleanup = DateTime.now();
+  DateTime _lastHeartbeat = DateTime.now();
+  DateTime _lastFailureReset =
+      DateTime.now(); // NEW: dedicated failure reset window
 
-  // === CLEANUP PERIODICO ===
+  /// Soglia di errori oltre la quale il sistema è considerato "non sano"
+  final int failureThreshold;
   Timer? _cleanupTimer;
 
   AtomicStateManager(
@@ -64,6 +70,7 @@ class AtomicStateManager {
     this.cacheTimeout = const Duration(seconds: 30),
     this.maxCacheEntries = 50,
     this.maxCacheAge = const Duration(minutes: 30),
+    this.failureThreshold = 10, // NEW: configurable threshold
   });
 
   /// Esegue un'operazione atomica sullo stato di trading.
@@ -167,7 +174,10 @@ class AtomicStateManager {
         await _strategyStateRepository.getStrategyState(symbol);
 
     return repositoryResult.fold(
-      (failure) => Left(failure),
+      (failure) {
+        _repositoryFetchFailures++;
+        return Left(failure);
+      },
       (state) {
         if (state == null) {
           final initialState = AppStrategyState(symbol: symbol);
@@ -184,11 +194,14 @@ class AtomicStateManager {
 
   /// Invalida la cache forzando il reload dal repository
   void invalidateCache() {
+    _log.i(
+        'Invalidating cache (resetting stats). Final stats: ${getCacheStats()}');
     _cachedState = null;
     _multiSymbolCache.clear();
     _cacheHits = 0;
     _cacheMisses = 0;
     _cacheEvictions = 0;
+    _repositoryFetchFailures = 0;
   }
 
   /// Invalida la cache per un simbolo specifico
@@ -284,14 +297,17 @@ class AtomicStateManager {
     final now = DateTime.now();
 
     // Esegui heartbeat ogni 30 secondi
-    if (now.difference(_lastCacheCleanup).inSeconds >= 30) {
+    if (now.difference(_lastHeartbeat).inSeconds >= 30) {
       final stats = _getSystemHealthStats();
       _log.i('[HEARTBEAT] Statistiche sistema: $stats');
 
-      // Pulisci cache
-      _cleanupCache();
-
-      _lastCacheCleanup = now;
+      // Kilo AI: Periodically reset failure counter to handle transient issues
+      // Reset window every 1 hour (use dedicated timestamp)
+      if (now.difference(_lastFailureReset).inHours >= 1) {
+        _log.i('Resetting repository fetch failures window.');
+        _repositoryFetchFailures = 0;
+        _lastFailureReset = now;
+      }
     }
   }
 
@@ -310,15 +326,15 @@ class AtomicStateManager {
   bool _isSystemHealthy() {
     // Sistema considerato non sano se:
     // 1. Cache troppo piena (> 80% del limite)
-    // 2. Troppi errori di cache
+    // 2. Troppi errori di recupero dal repository (non semplici miss)
 
     final cacheStats = getCacheStats();
 
     final totalEntries = cacheStats['totalEntries'] as int;
-    final cacheMisses = cacheStats['cacheMisses'] as int;
+    final repoFailures = _repositoryFetchFailures;
 
     final cacheTooFull = totalEntries > (maxCacheEntries * 0.8);
-    final tooManyErrors = cacheMisses > 1000; // Soglia arbitraria
+    final tooManyErrors = repoFailures > failureThreshold; // Use property
 
     return !cacheTooFull && !tooManyErrors;
   }
@@ -370,6 +386,7 @@ class AtomicStateManager {
     _cacheHits = 0;
     _cacheMisses = 0;
     _cacheEvictions = 0;
+    _repositoryFetchFailures = 0; // NEW: Reset on dispose
     _lastCacheCleanup = DateTime.now();
     stopPeriodicCleanup(); // Assicurati di fermare il timer al dispose
   }

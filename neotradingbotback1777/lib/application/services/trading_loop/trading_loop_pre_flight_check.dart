@@ -1,3 +1,4 @@
+// [AUDIT-PHASE-9] - Formal Audit Marker
 import 'package:fpdart/fpdart.dart';
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 import 'package:neotradingbotback1777/domain/entities/app_settings.dart';
@@ -77,6 +78,8 @@ class TradingLoopPreFlightCheck {
         }
 
         // 4. Verifica Info Simbolo (Lot Size, Min Notional, etc.)
+        // Questo passaggio assicura che i parametri di trading configurati
+        // rispettino i limiti imposti dall'exchange per il simbolo specifico.
         try {
           final symbolInfoResult =
               await _symbolInfoRepository.getSymbolInfo(symbol);

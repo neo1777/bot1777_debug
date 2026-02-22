@@ -1,3 +1,4 @@
+/// [AUDIT-PHASE-9] - Formal Audit Marker
 import 'package:fpdart/fpdart.dart';
 import 'package:get_it/get_it.dart';
 import 'package:neotradingbotback1777/application/managers/atomic_state_manager.dart';
