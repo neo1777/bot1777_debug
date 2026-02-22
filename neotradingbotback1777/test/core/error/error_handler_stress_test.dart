@@ -309,3 +309,4 @@ Future<String> _handleErrorWithContext(
 
   return 'Error with context handled: ${error.toString()} | Context: $contextStr';
 }
+
