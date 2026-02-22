@@ -25,7 +25,8 @@ Future<void> main() async {
   log.i('  I log di esecuzione sono salvati in: neotradbot_execution.log  ');
   log.i('=================================================================');
 
-  // Log security status immediately
+  // Log security status immediately for operator visibility
+  // Intentional early placement before initDependencies()
   logApiKeyAuthStatus();
 
   try {

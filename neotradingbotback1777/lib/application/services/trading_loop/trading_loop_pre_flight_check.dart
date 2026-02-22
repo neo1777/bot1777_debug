@@ -42,10 +42,25 @@ class TradingLoopPreFlightCheck {
     // Se ci sono ordini aperti ma noi stiamo avviando il loop, potrebbe esserci
     // un'incoerenza di stato (es. ordini rimasti appesi dopo un crash).
     try {
-      final openOrdersResult = await _apiService.getOpenOrders(symbol);
-      final Either<Failure, List<Map<String, dynamic>>> ordersEither =
-          openOrdersResult;
-      final Either<Failure, Unit> failure = ordersEither.fold(
+      // Tentativo di recupero ordini con retry per resilienza (transient failures)
+      Either<Failure, List<Map<String, dynamic>>> openOrdersResult =
+          const Right([]);
+      int retryCount = 0;
+      const maxRetries = 2;
+
+      while (retryCount <= maxRetries) {
+        final result = await _apiService.getOpenOrders(symbol);
+        if (result.isRight() || retryCount == maxRetries) {
+          openOrdersResult = result;
+          break;
+        }
+        retryCount++;
+        _log.w(
+            'Zombie Check: Fallito tentativo $retryCount/$maxRetries per $symbol. Riprovo...');
+        await Future.delayed(Duration(seconds: 1 * retryCount));
+      }
+
+      final Either<Failure, Unit> zombieCheckResult = openOrdersResult.fold(
         (f) => Left(f),
         (orders) {
           if (orders.isNotEmpty) {
@@ -61,10 +76,10 @@ class TradingLoopPreFlightCheck {
         },
       );
 
-      if (failure.isLeft()) return failure;
+      if (zombieCheckResult.isLeft()) return zombieCheckResult;
     } catch (e) {
       _log.w('Errore durante Zombie Trade Detection per $symbol: $e');
-      // Procediamo comunque? Per sicurezza blocchiamo se non riusciamo a verificare.
+      // Per sicurezza blocchiamo l'esecuzione se non possiamo confermare l'assenza di ordini residui.
       return Left(ServerFailure(
           message: 'Impossibile verificare ordini aperti (Zombie Trades): $e'));
     }
