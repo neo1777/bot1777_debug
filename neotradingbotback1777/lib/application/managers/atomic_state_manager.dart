@@ -6,7 +6,8 @@ import 'package:neotradingbotback1777/domain/repositories/strategy_state_reposit
 import 'package:fpdart/fpdart.dart';
 import 'package:neotradingbotback1777/core/logging/log_manager.dart';
 
-/// Classe interna per gestire le entry della cache con metadati
+/// [AUDIT-PHASE-9] Marker for formal Kilo AI audit.
+/// Concurrency safety, atomic state consistency, and resilience review.
 class _CacheEntry {
   final AppStrategyState state;
   DateTime lastAccess;
