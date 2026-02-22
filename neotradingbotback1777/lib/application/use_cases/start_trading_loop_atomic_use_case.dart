@@ -83,7 +83,8 @@ class StartTradingLoopAtomic {
     _preFlightCheckService = TradingLoopPreFlightCheck(
         accountRepository: accountRepository,
         symbolInfoRepository: symbolInfoRepository,
-        priceRepository: priceRepository);
+        priceRepository: priceRepository,
+        apiService: _sl<ITradingApiService>());
 
     _buyCircuitBreaker = CircuitBreaker(
       name: 'BuyOrderAtomic',

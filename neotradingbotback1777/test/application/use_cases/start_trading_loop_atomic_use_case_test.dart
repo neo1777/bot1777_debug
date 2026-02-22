@@ -175,6 +175,10 @@ void main() {
         inDustCooldown: anyNamed('inDustCooldown'),
       )).thenAnswer((_) async => false);
 
+      when(mockTradingApiService.getOpenOrders(any)).thenAnswer(
+        (_) async => const Right([]),
+      );
+
       // Setup price stream mock
       defaultPriceStream =
           StreamController<Either<Failure, double>>.broadcast();
@@ -947,4 +951,3 @@ class MockSendPort implements SendPort {
     throw UnimplementedError();
   }
 }
-
